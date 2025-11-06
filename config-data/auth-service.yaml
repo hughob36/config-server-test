@@ -4,6 +4,6 @@ server:
 security:
   jwt:
     private:
-      key: ${esta_claro}
+      key: ${PRIVATE_KEY}
     user:
-      generator: ${esta_claro}
+      generator: ${USER_GENERATOR}
