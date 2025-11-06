@@ -7,4 +7,3 @@ security:
       key: ${PRIVATE_KEY}
     user:
       generator: ${USER_GENERATOR}
-
