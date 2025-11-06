@@ -1,0 +1,10 @@
+server:
+  port: 8001
+
+security:
+  jwt:
+    private:
+      key: ${PRIVATE_KEY}
+    user:
+      generator: ${USER_GENERATOR}
+
