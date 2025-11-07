@@ -1,9 +1,5 @@
 server:
-  port: 8080
-
-spring:
-  application:
-    name: pokemonbreaker
+  port: 8002
 
   cloud:
     loadbalancer:
