@@ -3,12 +3,11 @@ server:
 spring:
   cloud:
     gateway:
-      discovery: # 'server.webflux' no es una clave válida aquí
-        locator:
-          enabled: true
-          # ELIMINA la línea 'lower-case-service-id: true'
-
-
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
 
 
 
