@@ -7,3 +7,12 @@ security:
       key: ${PRIVATE_KEY}
     user:
       generator: ${USER_GENERATOR}
+spring:
+  datasource:
+    url: ${BD_URL}
+    username: ${BD_USER}
+    password: ${BD_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
