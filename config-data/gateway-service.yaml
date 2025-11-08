@@ -1,12 +1,9 @@
 server:
   port: 443
-
 spring:
   cloud:
     gateway:
-      server:
-        webflux:
-          discovery:
-            locator:
-              enabled: true
-              # Se omite 'lower-case-service-id: true' (por defecto es 'false')
+      discovery: # 'server.webflux' no es una clave válida aquí
+        locator:
+          enabled: true
+          # ELIMINA la línea 'lower-case-service-id: true'
