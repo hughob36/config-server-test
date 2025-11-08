@@ -1,5 +1,6 @@
 server:
   port: 443
+
 spring:
   cloud:
     gateway:
@@ -8,6 +9,4 @@ spring:
           discovery:
             locator:
               enabled: true
-
-
-
+              # Se omite 'lower-case-service-id: true' (por defecto es 'false')
