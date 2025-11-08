@@ -1,9 +1,13 @@
 server:
   port: 443
+
 spring:
   cloud:
     gateway:
-      discovery: # 'server.webflux' no es una clave válida aquí
-        locator:
-          enabled: true
-          # ELIMINA la línea 'lower-case-service-id: true'
+      server:
+        webflux: 
+          discovery:
+            locator:
+              enabled: true
+              # Omitimos 'lower-case-service-id' para que use el default (false)
+              # y coincida con tu servicio 'AUTH-SERVICE' en mayúsculas
