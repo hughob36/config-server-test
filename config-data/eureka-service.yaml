@@ -1,0 +1,18 @@
+server:
+  port: 8761
+  
+spring:
+  application:
+    name: eureka-service
+
+eureka:
+  client:
+    # Indica que Eureka Server NO debe registrarse a sí mismo como un cliente en su propio registro.
+    register-with-eureka: false
+    # Indica que Eureka Server NO debe intentar descargar la lista de clientes.
+    fetch-registry: false
+    
+  instance:
+    # Este valor (0) es crucial y correcto para un servidor de Eureka en entornos de un solo nodo.
+    # Evita que el servidor envíe pulsaciones de renovación de registro inútiles.
+    lease-renewal-interval-in-seconds: 0
