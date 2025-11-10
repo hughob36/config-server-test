@@ -2,7 +2,6 @@ package com.auth_service.controller;
 
 import com.auth_service.model.UserApp;
 import com.auth_service.service.IUserAppService;
-import com.auth_service.service.UserAppService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

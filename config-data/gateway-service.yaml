@@ -1,13 +1,21 @@
 server:
   port: 443
-
+  
 spring:
   cloud:
     gateway:
-      server:
-        webflux: 
-          discovery:
-            locator:
-              enabled: true
-              # Omitimos 'lower-case-service-id' para que use el default (false)
-              # y coincida con tu servicio 'AUTH-SERVICE' en mayúsculas
+      # 1. Configuración del Discovery Locator (¡Correcto!)
+      discovery:
+        locator:
+          enabled: true
+          # El lower-case service-id es una buena práctica (opcional, pero recomendada)
+          lower-case-service-id: true 
+          
+      # 2. Definición de Filtros Globales (La nueva sección)
+      default-filters:
+        # Usamos la sintaxis YAML de lista (el guion - ) para definir un filtro
+        - RewritePath: 
+            # Expresión regular para capturar la parte de la ruta después del nombre del servicio
+            regexp: ^/.*?/(?<remaining>.*)$
+            # Reemplazo, enviando solo la parte restante al microservicio
+            replacement: /${remaining}          

@@ -6,6 +6,8 @@ import com.auth_service.model.UserApp;
 import com.auth_service.repository.IRoleRepository;
 import com.auth_service.repository.IUserAppRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -18,6 +20,7 @@ public class UserAppService implements IUserAppService{
 
     private final IUserAppRepository userAppRepository;
     private final IRoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserApp> findAll() {
@@ -33,6 +36,7 @@ public class UserAppService implements IUserAppService{
     @Override
     public UserApp save(UserApp userApp) {
        UserApp userValid = this.validateAndLoadRole(userApp);
+        userValid.setPassword(passwordEncoder.encode(userApp.getPassword()));
         return userAppRepository.save(userValid);
     }
 
@@ -50,7 +54,7 @@ public class UserAppService implements IUserAppService{
         UserApp findUser = this.findById(id);
         findUser.setName(userApp.getName());
         findUser.setUsername(userApp.getUsername());
-        findUser.setPassword(userApp.getPassword());
+        findUser.setPassword(passwordEncoder.encode(userApp.getPassword()));
         findUser.setEnable(userApp.isEnable());
         findUser.setAccountNotExpired(userApp.isAccountNotExpired());
         findUser.setAccountNotLocked(userApp.isAccountNotLocked());
@@ -67,4 +71,5 @@ public class UserAppService implements IUserAppService{
         userApp.setRoleSet(roleSet);
         return userApp;
     }
+
 }
