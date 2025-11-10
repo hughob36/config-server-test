@@ -4,18 +4,17 @@ server:
 spring:
   cloud:
     gateway:
-      # 1. Configuración del Discovery Locator (¡Correcto!)
-      discovery:
-        locator:
-          enabled: true
-          # El lower-case service-id es una buena práctica (opcional, pero recomendada)
-          lower-case-service-id: true 
-          
-      # 2. Definición de Filtros Globales (La nueva sección)
+      # Ahora, el 'discovery' se mueve bajo 'server.webflux'
+      server: 
+        webflux:
+          discovery:
+            locator:
+              # Propiedad corregida 1:
+              enabled: true 
+              # Propiedad corregida 2:
+              lower-case-service-id: true 
+              
       default-filters:
-        # Usamos la sintaxis YAML de lista (el guion - ) para definir un filtro
         - RewritePath: 
-            # Expresión regular para capturar la parte de la ruta después del nombre del servicio
             regexp: ^/.*?/(?<remaining>.*)$
-            # Reemplazo, enviando solo la parte restante al microservicio
-            replacement: /${remaining}          
+            replacement: /${remaining}
