@@ -1,22 +1,31 @@
+# Definición del Microservicio PokemonBreaker
+spring:
+  application:
+     name: pokemon-service 
+# 1. Configuración de Puerto Dinámico (Clave para Múltiples Instancias)
 server:
-  port: 8002
-
+  # '0' le dice a Spring Boot que asigne un puerto libre aleatorio
+  port: 0 
+  
   cloud:
     loadbalancer:
       eureka:
+        # 2. Dejamos la propiedad de balanceo de carga, aunque es el valor por defecto
         enabled: true
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    # 3. ID de instancia única para diferenciar las copias en Eureka
+    # Se usa el nombre de la app junto con un valor aleatorio.
+    instance-id: ${spring.application.name}:${random.value}
+
+# Propiedades de Seguridad
 security:
   jwt:
     private:
       key: ${PRIVATE_KEY}
     user:
-      generator: ${USER_GENERATOR}      
-
-
-
-
+      generator: ${USER_GENERATOR}
